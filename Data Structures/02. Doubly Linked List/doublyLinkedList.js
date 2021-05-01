@@ -174,6 +174,27 @@ class DoublyLinkedList {
 
     return node;
   }
+
+  reverse() {
+    let current = this.head;
+    const oldHead = this.head;
+    let counter = 0;
+
+    this.head = this.tail;
+    this.tail = oldHead;
+
+    while (counter != this.length) {
+      const temp = current.next;
+
+      current.next = current?.prev || null;
+      current.prev = temp || null;
+
+      current = temp;
+      counter++;
+    }
+
+    return this;
+  }
 }
 
 const l = new DoublyLinkedList();
@@ -184,7 +205,7 @@ l.push('C');
 l.push('D');
 l.push('E');
 l.push('F');
+l.push('G');
 l.push('H');
 l.push('I');
 l.push('J');
-l.push('K');
