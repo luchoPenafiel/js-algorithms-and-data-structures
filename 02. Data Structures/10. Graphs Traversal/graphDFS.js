@@ -93,6 +93,29 @@ class Graph {
 
     return resutl;
   }
+
+  breadthFirst(start) {
+    const stack = [start];
+    const result = [];
+    const visited = {};
+    let currentVertex;
+
+    visited[start] = true;
+
+    while (stack.length) {
+      currentVertex = stack.shift();
+      result.push(currentVertex);
+
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          stack.push(neighbor);
+        }
+      });
+    }
+
+    return result;
+  }
 }
 
 const g = new Graph();
@@ -112,7 +135,7 @@ g.addEdge('D', 'E');
 g.addEdge('D', 'F');
 g.addEdge('E', 'F');
 
-g.depthFirstIterative('A');
+g.breadthFirst('A');
 
 //          A
 //        /   \
